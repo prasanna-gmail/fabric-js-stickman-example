@@ -2,60 +2,105 @@
   var canvas = this.__canvas = new fabric.Canvas('c', { selection: false });
   fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
-  function makeCircle(left, top, line1, line2, line3, line4) {
+  var cRadius = 12
+  function makeCircle(num, title, left, top, line) {
     var c = new fabric.Circle({
       left: left,
       top: top,
       strokeWidth: 5,
-      radius: 12,
+      radius: cRadius,
       fill: '#fff',
       stroke: '#666'
     });
     c.hasControls = c.hasBorders = false;
 
-    c.line1 = line1;
-    c.line2 = line2;
-    c.line3 = line3;
-    c.line4 = line4;
+    c.line = line;
+    c.title = title;
+    c.num = num;
 
     return c;
   }
 
-  function makeLine(coords) {
+  function makeLine(coords, color) {
     return new fabric.Line(coords, {
       fill: 'red',
-      stroke: 'red',
-      strokeWidth: 5,
+      stroke: color,
+      strokeWidth: 2,
       selectable: false,
       evented: false,
     });
   }
 
-  var line = makeLine([250, 125, 250, 175]),
-    line2 = makeLine([250, 175, 250, 250]),
-    line3 = makeLine([250, 250, 300, 350]),
-    line4 = makeLine([250, 250, 200, 350]),
-    line5 = makeLine([250, 175, 175, 225]),
-    line6 = makeLine([250, 175, 325, 225]);
+  var line1 = makeLine([100, 100, 350, 100], "red"),
+    line2 = makeLine([250, 50, 250, 350], "green"),
+    line3 = makeLine([100, 300, 350, 300], "blue");
+  line1.num = 1
+  line2.num = 2
+  line3.num = 3
 
-  canvas.add(line, line2, line3, line4, line5, line6);
+  canvas.add(line1, line2, line3);
 
-  canvas.add(
-    makeCircle(line.get('x1'), line.get('y1'), null, line),
-    makeCircle(line.get('x2'), line.get('y2'), line, line2, line5, line6),
-    makeCircle(line2.get('x2'), line2.get('y2'), line2, line3, line4),
-    makeCircle(line3.get('x2'), line3.get('y2'), line3),
-    makeCircle(line4.get('x2'), line4.get('y2'), line4),
-    makeCircle(line5.get('x2'), line5.get('y2'), line5),
-    makeCircle(line6.get('x2'), line6.get('y2'), line6)
-  );
+  var c1 = makeCircle(1, "a1", line1.get('x1'), line1.get('y1'), line1),
+    c2 = makeCircle(2, "a2", line1.get('x2'), line1.get('y2'), line1),
+    c3 = makeCircle(1, "b1", line2.get('x1'), line2.get('y1'), line2),
+    c4 = makeCircle(2, "b2", line2.get('x2'), line2.get('y2'), line2),
+    c5 = makeCircle(1, "c1", line3.get('x1'), line3.get('y1'), line3),
+    c6 = makeCircle(2, "c2", line3.get('x2'), line3.get('y2'), line3)
+
+  c1.opp = c2
+  c2.opp = c1
+  c3.opp = c4
+  c4.opp = c3
+  c5.opp = c6
+  c6.opp = c5
+
+  canvas.add(c1, c2, c3, c4, c5, c6);
 
   canvas.on('object:moving', function (e) {
     var p = e.target;
-    p.line1 && p.line1.set({ 'x2': p.left, 'y2': p.top });
-    p.line2 && p.line2.set({ 'x1': p.left, 'y1': p.top });
-    p.line3 && p.line3.set({ 'x1': p.left, 'y1': p.top });
-    p.line4 && p.line4.set({ 'x1': p.left, 'y1': p.top });
+    // p.left = p.line1.get('x1');
+
+    if (p.title == "b1" || p.title == "b2") {
+      // change the line x only
+      p.line.set({ ['x' + p.num]: p.left })
+      // restrict the point left
+      p.top = p.line.get('y' + p.num);
+      // change the opposition point top
+      // p.opp.set({
+      //   left: p.line.get('x' + p.num)
+      // })
+
+    }
+    if (p.title == "a1" || p.title == "a2" || p.title == "c1" || p.title == "c2") {
+      // change the line y only
+      p.line.set({ 'y1': p.top, 'y2': p.top })
+      // restrict the point left
+      p.left = p.line.get('x' + p.num);
+      // change the opposition point top
+      p.opp.set({
+        top: p.line.get('y' + p.num)
+      })
+    }
+    // p.line1 && p.line1.set({ 'x1': p.left });
+    // p.line2 && p.line2.set({ 'x2': p.left, 'y2': p.top });
+
+    // p.set({
+    //   top: clamp(p.top, 0, p.canvas.height - p.height - cRadius),
+    //   left: clamp(p.left, 0, p.canvas.width - p.width - cRadius),
+    // })
+    p.setCoords();
+    p.opp.setCoords();
+
+    // console.log("pkp:  ~ file: script.js:63 ~ p.line1:", p.line1)
     canvas.renderAll();
   });
+  function getCoord(p) {
+    return p.line1 ? p.line1.top : p.line2.top
+  }
+
+  function clamp(num, min, max) {
+    return Math.min(Math.max(num, min), max);
+  };
+
+
 })();
