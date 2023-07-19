@@ -2,6 +2,39 @@
   var canvas = this.__canvas = new fabric.Canvas('c', { selection: false });
   fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
+
+  var mCircle = new fabric.Circle({
+    radius: 20,
+    left: 120,
+    top: 200,
+    angle: 15,
+    startAngle: 30,
+    endAngle: Math.PI / 2,
+    stroke: '#F00',
+    strokeWidth: 1,
+    fill: ''
+  });
+  mCircle.hasControls = mCircle.selectable = mCircle.evented = mCircle.hasBorders = false;
+
+  canvas.add(mCircle);
+
+  var opt = {
+    fill: '#f00',
+    stroke: '#F00',
+    left: 100,
+    top: 140,
+    radius: 95,
+    width: 95,
+    height: 15,
+    stAngle: 15,
+    endAngle: 50
+  }
+
+
+  var sarc1 = new fabric.Storearc(opt)
+  console.log("pkp:  ~ file: script.js:22 ~ sarc1:", sarc1)
+
+  canvas.add(sarc1);
   var cRadius = 12
   function makeCircle(num, title, left, top, line) {
     var c = new fabric.Circle({
@@ -89,7 +122,8 @@
     //   left: clamp(p.left, 0, p.canvas.width - p.width - cRadius),
     // })
     p.setCoords();
-    p.opp.setCoords();
+    if (p.opp)
+      p.opp.setCoords();
 
     // console.log("pkp:  ~ file: script.js:63 ~ p.line1:", p.line1)
     canvas.renderAll();
@@ -101,6 +135,9 @@
   function clamp(num, min, max) {
     return Math.min(Math.max(num, min), max);
   };
+
+
+
 
 
 })();
