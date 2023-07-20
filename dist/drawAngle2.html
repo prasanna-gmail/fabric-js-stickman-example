@@ -62,6 +62,7 @@
             // wedge indicating swept angle
             let angle1 = getAngle(points[1], points[2]);
             let angle2 = getAngle(points[1], points[0]);
+            console.log("pkp:  ~ file: drawAngle2.html:64 ~ myTest ~ angle1:", angle1, angle2)
             ctx.beginPath();
             ctx.moveTo(points[1].x, points[1].y);
             ctx.arc(points[1].x, points[1].y, 40, angle1, angle2, true);

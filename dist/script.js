@@ -3,38 +3,11 @@
   fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
 
-  var mCircle = new fabric.Circle({
-    radius: 20,
-    left: 120,
-    top: 200,
-    angle: 15,
-    startAngle: 30,
-    endAngle: Math.PI / 2,
-    stroke: '#F00',
-    strokeWidth: 1,
-    fill: ''
-  });
-  mCircle.hasControls = mCircle.selectable = mCircle.evented = mCircle.hasBorders = false;
-
-  canvas.add(mCircle);
-
-  var opt = {
-    fill: '#f00',
-    stroke: '#F00',
-    left: 100,
-    top: 140,
-    radius: 95,
-    width: 95,
-    height: 15,
-    stAngle: 15,
-    endAngle: 50
-  }
 
 
-  var sarc1 = new fabric.Storearc(opt)
-  console.log("pkp:  ~ file: script.js:22 ~ sarc1:", sarc1)
 
-  canvas.add(sarc1);
+
+
   var cRadius = 12
   function makeCircle(num, title, left, top, line) {
     var c = new fabric.Circle({
@@ -64,8 +37,11 @@
     });
   }
 
+
+
+
   var line1 = makeLine([100, 100, 350, 100], "red"),
-    line2 = makeLine([250, 50, 250, 350], "green"),
+    line2 = makeLine([300, 50, 150, 350], "green"),
     line3 = makeLine([100, 300, 350, 300], "blue");
   line1.num = 1
   line2.num = 2
@@ -88,6 +64,116 @@
   c6.opp = c5
 
   canvas.add(c1, c2, c3, c4, c5, c6);
+
+
+  var mCircle = new fabric.Circle({
+    radius: 20,
+    left: 20,
+    top: 110,
+    angle: 15,
+    // dirty: true,
+    startAngle: 10,
+    endAngle: 360,
+    stroke: '#F00',
+    strokeWidth: 1,
+    fill: ''
+  })
+  mCircle.hasControls = mCircle.selectable = mCircle.evented = mCircle.hasBorders = false;
+  canvas.add(mCircle);
+
+  function getMyAngle(cx, cy, ex, ey) {
+    var dy = ey - cy;
+    var dx = ex - cx;
+    var theta = Math.atan2(dy, dx); // range (-PI, PI]
+    theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
+    //if (theta < 0) theta = 360 + theta; // range [0, 360)
+    return theta;
+  }
+
+  var sarc1 = null
+  function updateAngle(point, callee) {
+
+    var interPoint = calculateIntersection(
+      { x: line1.get('x1'), y: line1.get('y1') },
+      { x: line1.get('x2'), y: line1.get('y2') },
+      { x: line2.get('x1'), y: line2.get('y1') },
+      { x: line2.get('x2'), y: line2.get('y2') })
+    // console.log("pkp:  ~ file: script.js:97 ~ interPoint:", interPoint)
+
+
+    // let A = new vec2(72, 102),
+    //   B = new vec2(134, 102),
+    //   C = new vec2(147, 194);
+
+    let A = new vec2(line1.get('x1'), line1.get('y1')),
+      B = new vec2(interPoint.x, interPoint.y),
+      C = new vec2(line2.get('x1'), line2.get('y1'));
+
+    let angle1 = getAngle(A, B);
+    let angle2 = getAngle(C, B);
+    console.log("pkp:  ~  ~ angle1:", angle1, angle2)
+
+    var angleX = angle2 - angle1;
+    var angle3 = angleX * 180 / Math.PI;
+    console.log("pkp:  ~ file: script.js:118 ~ updateAngle ~ angle3:", angle3)
+
+    var diff = 12
+    mCircle.set({
+      'startAngle': 180 - diff,
+      'endAngle': 180 + angle3 - diff,
+      'left': interPoint.x,
+      'top': interPoint.y
+    })
+
+  }
+
+  function drawAngle(callee) {
+    console.log("pkp:  ~ file: script.js:128 ~ drawAngle ~ callee:", callee)
+
+    var interPoint = calculateIntersection(
+      { x: line1.get('x1'), y: line1.get('y1') },
+      { x: line1.get('x2'), y: line1.get('y2') },
+      { x: line2.get('x1'), y: line2.get('y1') },
+      { x: line2.get('x2'), y: line2.get('y2') })
+    console.log("pkp:  ~ file: script.js:97 ~ interPoint:", interPoint)
+
+    let A = new vec2(line1.get('x1'), line1.get('y1')),
+      B = new vec2(interPoint.x, interPoint.y),
+      C = new vec2(line2.get('x1'), line2.get('y1'));
+
+    var opt = {
+      fill: 'blue',
+      radius: 100,
+      points: [A, B, C]
+    }
+
+    /**
+     * BO ARC
+     */
+    sarc1 = new fabric.Storearc(opt)
+    sarc1.stAngle = 100
+    sarc1.dirty = true;
+
+    // sarc1.x = 20
+    canvas.add(sarc1);
+    canvas.renderAll();
+    console.log("pkp:  ~ file: script.js:122 ~ drawAngle ~ sarc1:", sarc1)
+    /**
+     * EO ARC
+     */
+
+
+
+
+
+    // let A = new vec2(72, 102),
+    //   B = new vec2(134, 102),
+    //   C = new vec2(147, 194);
+
+  }
+
+  // drawAngle()
+
 
   canvas.on('object:moving', function (e) {
     var p = e.target;
@@ -126,6 +212,8 @@
       p.opp.setCoords();
 
     // console.log("pkp:  ~ file: script.js:63 ~ p.line1:", p.line1)
+
+    updateAngle(p, "pppp")
     canvas.renderAll();
   });
   function getCoord(p) {

@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+
+<head>
+    <style>
+        #my-canvas {
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="my-canvas" width="350" height="300"></canvas>
+    <script>
+
+        // -----------------------------------------------------------------------
+        // Intersection formula:
+
+        function calculateIntersection(p1, p2, p3, p4) {
+
+            var c2x = p3.x - p4.x; // (x3 - x4)
+            var c3x = p1.x - p2.x; // (x1 - x2)
+            var c2y = p3.y - p4.y; // (y3 - y4)
+            var c3y = p1.y - p2.y; // (y1 - y2)
+
+            // down part of intersection point formula
+            var d = c3x * c2y - c3y * c2x;
+
+            if (d == 0) {
+                throw new Error('Number of intersection points is zero or infinity.');
+            }
+
+            // upper part of intersection point formula
+            var u1 = p1.x * p2.y - p1.y * p2.x; // (x1 * y2 - y1 * x2)
+            var u4 = p3.x * p4.y - p3.y * p4.x; // (x3 * y4 - y3 * x4)
+
+            // intersection point formula
+
+            var px = (u1 * c2x - c3x * u4) / d;
+            var py = (u1 * c2y - c3y * u4) / d;
+
+            var p = { x: px, y: py };
+
+            return p;
+        }
+
+
+        // Usage example:
+
+        // line 1
+        var p1 = { x: 85, y: 45 }; // P1: (x1, y1)
+        var p2 = { x: 260, y: 180 }; // P2: (x2, y2)
+
+        // line 2
+        var p3 = { x: 225, y: 75 }; // P3: (x4, y4)
+        var p4 = { x: 65, y: 260 }; // P4: (x4, y4)
+
+        var p = calculateIntersection(p1, p2, p3, p4);  // intersection point
+
+        console.log('P1=(' + p1.x + '; ' + p1.y + ')');
+        console.log('P2=(' + p2.x + '; ' + p2.y + ')');
+        console.log('P3=(' + p3.x + '; ' + p3.y + ')');
+        console.log('P4=(' + p4.x + '; ' + p4.y + ')');
+
+        console.log('P=(' + p.x + '; ' + p.y + ')');
+
+
+        // -----------------------------------------------------------------------
+        // Drawing results:
+
+        function drawLine(context, p1, p2, color) {
+            context.strokeStyle = color;
+
+            context.beginPath();
+            context.moveTo(p1.x, p1.y);
+            context.lineTo(p2.x, p2.y);
+            context.stroke();
+        }
+
+        // https://dirask.com/posts/JavaScript-how-to-draw-point-on-canvas-element-PpOBLD
+        //
+        function drawPoint(context, x, y, label, color, size) {
+            if (color == null) {
+                color = '#000';
+            }
+
+            if (size == null) {
+                size = 5;
+            }
+
+            // to increase smoothing for numbers with decimal part
+            var pointX = Math.round(x);
+            var pointY = Math.round(y);
+
+            context.beginPath();
+            context.fillStyle = color;
+            context.arc(pointX, pointY, size, 0 * Math.PI, 2 * Math.PI);
+            context.fill();
+
+            if (label) {
+                var textX = pointX;
+                var textY = Math.round(pointY - size - 3);
+
+                var text = label + '=(' + x + '; ' + y + ')';
+
+                context.font = 'Italic 14px Arial';
+                context.fillStyle = color;
+                context.textAlign = 'center';
+                context.fillText(text, textX, textY);
+            }
+        }
+
+        var canvas = document.querySelector('#my-canvas');
+        var context = canvas.getContext('2d');
+
+        drawLine(context, p1, p2, 'red');
+        drawPoint(context, p1.x, p1.y, 'P1', 'red', 5);
+        drawPoint(context, p2.x, p2.y, 'P2', 'red', 5);
+
+        drawLine(context, p3, p4, 'blue');
+        drawPoint(context, p3.x, p3.y, 'P3', 'blue', 5);
+        drawPoint(context, p4.x, p4.y, 'P4', 'blue', 5);
+
+        drawPoint(context, p.x, p.y, 'P', 'green', 5);
+
+    </script>
+</body>
+
+</html>
