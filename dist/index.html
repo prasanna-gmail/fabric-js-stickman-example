@@ -4,24 +4,44 @@
 <head>
   <meta charset="UTF-8">
   <title>Angle show</title>
+
 </head>
 
 <body>
+  <div class="todo">
+    <pre>
+      <b>TODO:</b>
+        . Rotate
+        . Add an Arrow
+        . Show angles in Text
+        . Show other angles on click
+        . Restrict movement min max
+     <sub> Anything left?</sub>
+    </pre>
+  </div>
+
   <!-- partial:index.partial.html -->
-  <canvas id="c" width="400" height="400"></canvas>
+  <canvas id="c" width="1200" height="800"></canvas>
   <!-- partial -->
 
-  <script src="jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
-    crossorigin="anonymous"></script>
+  <script src="jquery.min.js" crossorigin="anonymous"></script>
 
-  <script src="fabric.min.js"
-    integrity="sha512-CeIsOAsgJnmevfCi2C7Zsyy6bQKi43utIjdA87Q0ZY84oDqnI0uwfM9+bKiIkI75lUeI00WG/+uJzOmuHlesMA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="fabric.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script src="./utils2.js"></script>
   <script src="./utils.js"></script>
   <script src="./script.js"></script>
 
+  <style>
+    canvas {
+      zoom: 100%;
+      /* background: rgb(255, 255, 255); */
+    }
+
+    .todo {
+      position: absolute;
+    }
+  </style>
 </body>
 
 </html>
