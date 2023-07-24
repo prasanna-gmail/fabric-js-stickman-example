@@ -1,0 +1,112 @@
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../fabric.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+
+<body>
+    <div class="canvas-container">
+        <canvas id="c" width="600" height="600"></canvas>
+    </div>
+    <script>
+
+
+
+        var canvas = new fabric.Canvas(document.getElementById('c'));
+        var text2 = new fabric.Text('table name rotonta',
+            {
+                lockRotation: true,
+                centeredRotation: true,
+
+                fontSize: 12,
+                fontWeight: 'bold',
+                originX: 'center',
+                originY: 'center', top: 5,
+                fill: 'black',
+                left: 50,
+                top: 150,
+            });
+
+
+
+        var rect1 = new fabric.Rect({
+            width: 100,
+            height: 100,
+            left: 50,
+            top: 150,
+            fill: 'rgba(255,0,0,0.5)'
+        });
+        var circle1 = new fabric.Circle({
+            radius: 50,
+            left: 175,
+            top: 175,
+            fill: '#aac'
+        });
+
+        var group = new fabric.Group([rect1, circle1, text2]);
+
+
+        canvas.add(group);
+
+
+        group.on('rotating', function (evt) {
+            // console.log("pkp:  ~ file: rotateWithoutTextSimple.html:58 ~ evt:", evt)
+            updateYellowPosition();
+        });
+
+        var angleDiff = circle1.angle; // the image to cover is angled as yellow angle, relative to red angle
+        var centerDiff = circle1.angle; // the image to cover is angled as yellow angle, relative to red angle
+
+        var centerDiff = circle1.getCenterPoint().subtract(rect1.getCenterPoint());
+        // yellow is circle1
+
+        // ******* fix for group rotate angle issue  ******
+        // ************************************************
+        canvas.on('after:renderx', function (e) {
+
+            console.log("pkp:  ~ file: rotateWithoutTextSimple.html:75 ~ e:", e)
+            // text2.angle = 90;
+            text2.set({
+                angle: -group.angle
+            })
+            // canvas.renderAll();
+        });
+
+        function updateYellowPosition() {
+            // Here I would like to have some logic which will identify proper position
+            // (left, top and angle) of Red's background image location and apply those 
+            // to the Yellow element
+            // var matrix = rect1.calcTransformMatrix(); // get all the position information of rect1
+            // var newCenterForYellow = fabric.util.transformPoint(centerDiff, matrix);
+            // circle1.top = newCenterForYellow.y;
+            // circle1.left = newCenterForYellow.x;
+            // circle1.angle = rect1.angle + angleDiff;
+            // text2.set({ angle: -group.angle })
+
+
+            // text2._setOriginToCenter();
+            text2.set({ angle: -group.angle }).setCoords();
+            // text2._resetOrigin();
+
+            // text2.setAngle(-group.angle).setCoords();
+
+
+            // console.log("pkp:  ~ file: rotateWithoutTextSimple.html:77 ~ updateYellowPosition ~ rect1.angle + angleDiff:", rect1.angle + angleDiff)
+            // circle1.scaleX = rect1.scaleX;
+            // circle1.scaleY = rect1.scaleY;
+            canvas.renderAll();
+        }
+
+
+    </script>
+
+</body>
+
+</html>

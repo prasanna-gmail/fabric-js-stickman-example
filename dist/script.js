@@ -1,42 +1,34 @@
 (function () {
+  alert("pppppp")
   var canvas = this.__canvas = new fabric.Canvas('c', { selection: false });
   fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
-  var cRadius = 20
-  function makeCircle(num, title, left, top, line) {
-    var c = new fabric.Circle({
-      left: left,
-      top: top,
-      strokeWidth: 5,
-      radius: cRadius,
+
+  var label1, label2 = null;
+  function createLabel(callee) {
+    var planetLabel = new fabric.Text('', {
       fill: '#fff',
-      stroke: '#666'
+      fontSize: 16,
+      fontFamily: 'Open Sans',
+      textBackgroundColor: '#002244'
     });
-    c.hasControls = c.hasBorders = false;
-
-    c.line = line;
-    c.title = title;
-    c.num = num;
-
-    return c;
+    return planetLabel
   }
 
-  function makeLine(coords, color) {
-    return new fabric.Line(coords, {
-      fill: 'red',
-      stroke: color,
-      strokeWidth: 2,
-      selectable: false,
-      evented: false,
+  function updateLabel(label, c, angle, params) {
+    console.log("pkp:  ~ file: script.js:18 ~ updateLabel ~ angle:", angle)
+    label.set({
+      left: c.left - 50,
+      top: c.top - 20,
+      text: Math.round(angle).toString()
+
     });
+
+    label.setCoords()
   }
 
-
-
-
-
-
-  function updateAngle(myLine1, myline2, myCircle, callee) {
+  function updateAngle(myLine1, myline2, myCircle, mAngle, callee) {
+    console.log("pkp:  ~ file: script.js:28 ~ updateAngle ~ mAngle:", mAngle)
 
     var interPoint = calculateIntersection(
       { x: myLine1.get('x1'), y: myLine1.get('y1') },
@@ -53,26 +45,37 @@
     let angle2 = getAngle(C, B);
 
     var diffAngle = angle2 - angle1;
-    var myAngle = diffAngle * 180 / Math.PI;
-
+    globalObj[mAngle] = diffAngle * 180 / Math.PI;
     var adjustAngle = 12
     myCircle.set({
       'startAngle': 180 - adjustAngle,
-      'endAngle': 180 + myAngle - adjustAngle,
+      'endAngle': 180 + globalObj[mAngle] - adjustAngle,
       'left': interPoint.x,
       'top': interPoint.y
     })
 
-
-
+    myCircle.setCoords()
   }
 
   canvas.on('after:render', function (opt) {
-    console.log("pkp:  ~ file: script.js:118 ~ opt:", opt)
+    // console.log("pkp:  ~ file: script.js:118 ~ opt:", opt)
 
   })
 
   // mouse drag and moving....
+  canvas.on('mouse:down', function (e) {
+
+
+
+    console.log("pkp:  ~ file: script.js:70 ~ e.target:", e.target)
+    if (e.target && e.target.label) {
+
+      if (e.target.label == "myAngle1") {
+        console.log("pkp:  ~ file: script.js:74 ~ globalObj.myAngle1:", globalObj.myAngle1)
+      }
+    }
+  })
+  /** ------------------------------------------------------------ BO moving --------------------------- */
   canvas.on('object:moving', function (e) {
     var p = e.target;
     // p.left = p.line1.get('x1');
@@ -111,10 +114,17 @@
 
     // console.log("pkp:  ~ file: script.js:63 ~ p.line1:", p.line1)
 
-    updateAngle(line1, line2, mCircle1, "pppp")
-    updateAngle(line3, line2, mCircle2, "pppp")
+    updateAngle(line1, line2, mCircle1, "myAngle1", "pppp")
+    updateAngle(line3, line2, mCircle2, "myAngle2", "pppp")
+
+    updateLabel(label1, mCircle1, globalObj.myAngle1, "from move")
+    updateLabel(label2, mCircle2, globalObj.myAngle2, "from move")
     canvas.renderAll()
   });
+  /** ------------------------------------------------------------ EO moving --------------------------- */
+
+
+
   function getCoord(p) {
     return p.line1 ? p.line1.top : p.line2.top
   }
@@ -124,26 +134,21 @@
   };
 
 
-  var line1,
-    line2,
-    line3;
-  var c1, c2,
-    c3,
-    c4,
-    c5,
-    c6;
+  var line1, line2, line3;
+  var c1, c2, c3, c4, c5, c6;
   var mCircle1, mCircle2
 
-  function craeteAngleCircle() {
+  function craeteAngleCircle(label, callee) {
 
     return new fabric.Circle({
+      label: label,
       radius: 20,
       left: 20,
       top: 110,
       angle: 15,
       startAngle: 10,
       endAngle: 360,
-      stroke: '#F00',
+      stroke: '#000',
       strokeWidth: 1,
       fill: ''
     })
@@ -154,9 +159,7 @@
     line1 = makeLine([100, 200, 600, 200], "red"),
       line2 = makeLine([400, 100, 350, 500], "green"),
       line3 = makeLine([100, 400, 600, 400], "blue");
-    line1.num = 1
-    line2.num = 2
-    line3.num = 3
+    line1.num = 1; line2.num = 2; line3.num = 3;
 
 
 
@@ -167,30 +170,46 @@
       c5 = makeCircle(1, "c1", line3.get('x1'), line3.get('y1'), line3),
       c6 = makeCircle(2, "c2", line3.get('x2'), line3.get('y2'), line3)
 
-    c1.opp = c2
-    c2.opp = c1
-    c3.opp = c4
-    c4.opp = c3
-    c5.opp = c6
-    c6.opp = c5
+    c1.opp = c2; c2.opp = c1; c3.opp = c4; c4.opp = c3; c5.opp = c6; c6.opp = c5;
 
-    mCircle1 = craeteAngleCircle()
-    mCircle2 = craeteAngleCircle()
+    mCircle1 = craeteAngleCircle("myAngle1")
+    mCircle2 = craeteAngleCircle("myAngle2")
 
+    label1 = createLabel("init 1")
+    label2 = createLabel("init 2")
+  }
+
+  function disableHandles(myObj) {
+    // myObj.hasControls = myObj.selectable = myObj.evented = myObj.hasBorders = false;
+    myObj.hasControls = myObj.selectable = myObj.hasBorders = false;
 
 
   }
-
   function init() {
     canvas.add(line1, line2, line3);
     canvas.add(c1, c2, c3, c4, c5, c6);
 
-    mCircle1.hasControls = mCircle1.selectable = mCircle1.evented = mCircle1.hasBorders = false;
-    mCircle2.hasControls = mCircle1.selectable = mCircle1.evented = mCircle1.hasBorders = false;
+    disableHandles(mCircle1)
+    disableHandles(mCircle2)
+
+    disableHandles(label1)
+    disableHandles(label2)
+
+    // add all
     canvas.add(mCircle1);
     canvas.add(mCircle2);
-    updateAngle(line1, line2, mCircle1, "c1")
-    updateAngle(line3, line2, mCircle2, "c2")
+    canvas.add(label1);
+    canvas.add(label2);
+
+
+    //angles
+    updateAngle(line1, line2, mCircle1, "myAngle1", "pppp")
+    updateAngle(line3, line2, mCircle2, "myAngle2", "pppp")
+
+    //labels
+    updateLabel(label1, mCircle1, globalObj.myAngle1, "from move")
+    updateLabel(label2, mCircle2, globalObj.myAngle2, "from move")
+
 
   }
 
