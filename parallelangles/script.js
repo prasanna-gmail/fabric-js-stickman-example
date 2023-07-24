@@ -1,5 +1,4 @@
 (function () {
-  alert("pppppp")
   var canvas = this.__canvas = new fabric.Canvas('c', { selection: false });
   fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
@@ -155,13 +154,10 @@
   }
   function createAll() {
 
-
     line1 = makeLine([100, 200, 600, 200], "red"),
       line2 = makeLine([400, 100, 350, 500], "green"),
       line3 = makeLine([100, 400, 600, 400], "blue");
     line1.num = 1; line2.num = 2; line3.num = 3;
-
-
 
     c1 = makeCircle(1, "a1", line1.get('x1'), line1.get('y1'), line1),
       c2 = makeCircle(2, "a2", line1.get('x2'), line1.get('y2'), line1),
