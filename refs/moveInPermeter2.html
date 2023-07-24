@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script src="../libs/jquery.min.js"></script>
+    <script src="../libs/fabric.min.js"></script>
+</head>
+
+<body>
+    <canvas id="c" width="500" height="500" style="border:1px solid #ccc"></canvas>
+
+    <script>
+
+        var canvas = this.__canvas = new fabric.Canvas('c', {
+            selection: false
+        });
+        fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
+
+        var centerPointX = 230,
+            centerPointY = 340,
+            centerRadius = 175
+
+        var handle = new fabric.Circle({
+            left: centerPointX,
+            top: centerPointY - centerRadius,
+            strokeWidth: 5,
+            radius: 12,
+            fill: '#fff',
+            stroke: '#666'
+        });
+        handle.hasControls = handle.hasBorders = false;
+        canvas.add(handle);
+
+        canvas.on('object:moving', function (e) {
+            var p = e.target;
+
+            if (e.target == handle) {
+                deltaLeft = p.left - centerPointX;
+                deltaTop = p.top - centerPointY;
+
+                var length = Math.sqrt(deltaLeft * deltaLeft + deltaTop * deltaTop);
+                if (length <= centerRadius - 5 || length >= centerRadius + 5) {
+                    var radians = Math.atan2(deltaTop, deltaLeft)
+                    if (length < centerRadius) {
+                        length = centerRadius - 5;
+                    } else {
+                        length = centerRadius + 5;
+                    }
+                    p.left = Math.cos(radians) * length + centerPointX
+                    p.top = Math.sin(radians) * length + centerPointY
+                }
+            }
+
+            canvas.renderAll();
+        });
+
+    </script>
+</body>
+
+</html>

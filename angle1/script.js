@@ -2,60 +2,68 @@
     var canvas = this.__canvas = new fabric.Canvas('c', { selection: false });
     fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
-    function makeCircle(left, top, line1, line2, line3, line4) {
+    function makeCircle(left, top, line, color, label) {
         var c = new fabric.Circle({
             left: left,
             top: top,
             strokeWidth: 5,
             radius: 12,
-            fill: '#fff',
-            stroke: '#666'
+            fill: color,
+            stroke: color
         });
+        c.label = label
         c.hasControls = c.hasBorders = false;
-
-        c.line1 = line1;
-        c.line2 = line2;
-        c.line3 = line3;
-        c.line4 = line4;
-
+        c.line = line;
         return c;
     }
 
-    function makeLine(coords) {
-        return new fabric.Line(coords, {
+    function makeLine(coords, color, num) {
+        var l = new fabric.Line(coords, {
             fill: 'red',
-            stroke: 'red',
+            stroke: color,
             strokeWidth: 5,
             selectable: false,
             evented: false,
         });
+        l.num = num;
+
+        return l
     }
 
-    var line = makeLine([250, 125, 250, 175]),
-        line2 = makeLine([250, 175, 250, 250]),
-        line3 = makeLine([250, 250, 300, 350]),
-        line4 = makeLine([250, 250, 200, 350]),
-        line5 = makeLine([250, 175, 175, 225]),
-        line6 = makeLine([250, 175, 325, 225]);
+    var line1 = makeLine([100, 300, 500, 300], "red", 1),
+        line2 = makeLine([300, 300, 200, 100], "green", 2),
+        line3 = makeLine([300, 300, 300, 150], "blue", 3)
 
-    canvas.add(line, line2, line3, line4, line5, line6);
+    canvas.add(line1, line2, line3);
 
     canvas.add(
-        makeCircle(line.get('x1'), line.get('y1'), null, line),
-        makeCircle(line.get('x2'), line.get('y2'), line, line2, line5, line6),
-        makeCircle(line2.get('x2'), line2.get('y2'), line2, line3, line4),
-        makeCircle(line3.get('x2'), line3.get('y2'), line3),
-        makeCircle(line4.get('x2'), line4.get('y2'), line4),
-        makeCircle(line5.get('x2'), line5.get('y2'), line5),
-        makeCircle(line6.get('x2'), line6.get('y2'), line6)
+        makeCircle(line1.x1, line1.y1, line1, "green", "point1"),
+        makeCircle(line1.x2, line1.y2, line1, "green", "point2"),
+        makeCircle(line2.x2, line2.y2, line2, "red"),
+        makeCircle(line3.x2, line3.y2, line3, "red")
     );
 
     canvas.on('object:moving', function (e) {
         var p = e.target;
-        p.line1 && p.line1.set({ 'x2': p.left, 'y2': p.top });
-        p.line2 && p.line2.set({ 'x1': p.left, 'y1': p.top });
-        p.line3 && p.line3.set({ 'x1': p.left, 'y1': p.top });
-        p.line4 && p.line4.set({ 'x1': p.left, 'y1': p.top });
+        // p.line && p.line.set({ 'x2': p.left, 'y2': p.top });
+        console.log("pkp:  ~ file: script.js:49 ~ p:", p.line.angle)
+
+        p.line.set({
+            angle: p.line.angle + 10
+        })
+        console.log("pkp:  ~ file: script.js:54 ~ p.line:", p.line)
+        // p.set({
+        //     left: 100,
+        //     top: 100
+
+        // })
+        // console.log("pkp:  ~ file: script.js:48 ~ p.line:", p.line)
+        if (p.line.num == 1) {
+            // console.log("pkp:  ~ file: script.js:52 ~ p.line.num:", p.line.num)
+
+        } else {
+
+        }
         canvas.renderAll();
     });
 })();
