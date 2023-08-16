@@ -62,15 +62,19 @@
             })
 
             if (p.label == "point1") {
-                console.log("pkp:  ~ file: script.js:62 ~ updatePoint ~ p.label:", p.label)
+                p2.left = Math.cos(radians) * -length + centerPointX
+                p2.top = Math.sin(radians) * -length + centerPointY
 
-                console.log("pkp:  ~ file: script.js:66 ~ updatePoint ~  p.line.x2:", p.line.x2)
-                // p2.set({
-                //     left: p.line.x2,
-                //     top: p.line.y2
-                // })
+                // updatePointPos(p2)
+                p2.setCoords()
+                canvas.renderAll();
+            } else if (p.label == "point2") {
+                p1.left = Math.cos(radians) * -length + centerPointX
+                p1.top = Math.sin(radians) * -length + centerPointY
 
-                updatePointPos(p2)
+                // updatePointPos(p1)
+                p1.setCoords()
+                canvas.renderAll();
             } else {
 
             }
@@ -106,7 +110,7 @@
     function init() {
         canvas.add(line1, line2, line3);
         p1 = makeCircle(line1.x1, line1.y1, line1, "green", "point1")
-        p2 = makeCircle(line1.x2, line1.y2, line1, "green", "point2")
+        p2 = makeCircle(line1.x2, line1.y2, line1, "yellow", "point2")
         p3 = makeCircle(line2.x2, line2.y2, line2, "red")
         p4 = makeCircle(line3.x2, line3.y2, line3, "red")
         canvas.add(
