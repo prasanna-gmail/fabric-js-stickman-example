@@ -1,67 +1,67 @@
 
 *{
-    box-sizing: border-box;
-    -moj-box-sizing:border-box;
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    user-select: none;
+   box-sizing: border-box;
+   -moj-box-sizing:border-box;
+   margin: 0;
+   padding: 0;
+   font-family: sans-serif;
+   user-select: none;
 }
 
 #main-shapes-container{
-    position: absolute;
-    top: 50px;
-    right: 0;
-    padding: 10px;
-    background-color: beige;
- }
+   position: absolute;
+   top: 50px;
+   right: 0;
+   padding: 10px;
+   background-color: beige;
+}
 
- #secondary-shapes-container{
-    display: grid;
-    grid-template-columns: auto auto auto auto;
- }
+#secondary-shapes-container{
+   display: grid;
+   grid-template-columns: auto auto auto auto;
+}
 
- .shape-btn{
-    width: 80px;
-    height: 80px;
-    border: 1px solid red;
-    cursor: pointer;
- }
+.shape-btn{
+   width: 80px;
+   height: 80px;
+   border: 1px solid red;
+   cursor: pointer;
+}
 
- .rectangle-btn{
-   width: 120px;
-    height: 80px;
- }
- .shape-btn:hover{
-    background-color: rgb(148, 148, 148);
- }
+.rectangle-btn{
+  width: 120px;
+   height: 80px;
+}
+.shape-btn:hover{
+   background-color: rgb(148, 148, 148);
+}
 
- #adding-triangle-btn{
-    content: url(/assets/images/triangle1.png);
- }
- #adding-square-btn{
-   content: url(assets/images/square.png)
- }
- #adding-rectangle-btn{
-   content: url(assets/images/rectangle.png)
- }
- #adding-hexagon-btn{
-   content: url(assets/images/hexagon.png)
- }
+#adding-triangle-btn{
+   content: url(/assets/images/triangle1.png);
+}
+#adding-square-btn{
+  content: url(/assets/images/square.png)
+}
+#adding-rectangle-btn{
+  content: url(/assets/images/rectangle.png)
+}
+#adding-hexagon-btn{
+  content: url(/assets/images/hexagon.png)
+}
 
- #adding-star-btn{
-   content: url(assets/images/star41.png)
- }
- #adding-trapezoid-btn{
-   content: url(assets/images/trapezoid.png)
- }
- #rotational-symmetry-number{
-    position: absolute;
-    top: 800px;
-    left: 1000px;
-    width: 400px;
-    height: 50px;
-    background-color: aquamarine;
-    text-align: center;
-    padding-top: 15px;
- }
+#adding-star-btn{
+  content: url(/assets/images/star41.png)
+}
+#adding-trapezoid-btn{
+  content: url(/assets/images/trapezoid.png)
+}
+#rotational-symmetry-number{
+   position: absolute;
+   top: 800px;
+   left: 1000px;
+   width: 400px;
+   height: 50px;
+   background-color: aquamarine;
+   text-align: center;
+   padding-top: 15px;
+}
