@@ -1,0 +1,33 @@
+
+.slider{
+position: absolute;
+top:90%;
+left:10%;
+}
+#theorem{
+  position:absolute;
+  left:200px;
+}
+
+.angleContainer{
+  width: 60px;
+  height: 40px;
+  text-align: center;
+    padding-top: 5px;
+    font-weight: bold;
+ 
+}
+
+#angleLine3AndLine4{
+  position: absolute;
+    top: 230px;
+    left: 480px;
+    color:red;
+}
+
+#angleLine1AndLine2{
+  position: absolute;
+  top: 510px;
+  left: 500px;
+  color:green
+}

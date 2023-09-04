@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <title>Circle-theorem3</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1200" height="800"></canvas>
+    <div class="slider"><input type="range" min="100" max="300" value="300" oninput="updateRadiusOfCircle(this.value)"></div> 
+    <p class="angleContainer" id="angle-a"></p>
+    <script src="../libs/jquery.min.js"></script>
+    <script src="../libs/fabric.min.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>

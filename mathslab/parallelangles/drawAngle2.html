@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Angle show simplified</title>
+    <style>
+        canvas {
+            zoom: 67%;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id='c' width='996' height='730'></canvas>
+    <script>
+        "use strict";
+
+        class vec2 {
+            constructor(x, y) { this.x = x; this.y = y; }
+            get x() { return this._x; }
+            set x(newVal) { this._x = newVal; }
+            get y() { return this._y; }
+            set y(newVal) { this._y = newVal; }
+            get length() { return Math.hypot(this.x, this.y); }
+            set length(len) { var invLen = len / this.length; this.timesEquals(invLen); }
+            add(other) { return new vec2(this.x + other.x, this.y + other.y); }
+            sub(other) { return new vec2(this.x - other.x, this.y - other.y); }
+            plusEquals(other) { this.x += other.x; this.y += other.y; return this; }
+            minusEquals(other) { this.x -= other.x; this.y -= other.y; return this; }
+            timesEquals(scalar) { this.x *= scalar; this.y *= scalar; return this; }
+            divByEquals(scalar) { this.x /= scalar; this.y /= scalar; return this; }
+            setTo(other) { this.x = other.x; this.y = other.y; }
+            toString() { return `vec2 {x: ${this.x}, y: ${this.y}}` }
+            toStringN(n) { return `vec2 {x: ${this.x.toFixed(n)}, y: ${this.y.toFixed(n)}}` }
+            dotProd(other) { return this.x * other.x + this.y * other.y; }
+            timesEquals(scalar) { this.x *= scalar; this.y *= scalar; return this; }
+            normalize() { let len = this.length; this.x /= len; this.y /= len; return this; }
+            static clone(other) { let result = new vec2(other.x, other.y); return result; }
+            clone() { return vec2.clone(this); }
+        };
+
+        window.addEventListener('load', onWindowLoaded, false);
+
+        function onWindowLoaded(evt) {
+            var can = document.getElementById('c');
+            let A = new vec2(72, 102),
+                B = new vec2(134, 102),
+                C = new vec2(147, 194);
+            myTest(can, [A, B, C]);
+        }
+
+        function getAngle(origin, pt) {
+            let delta = pt.sub(origin);
+            let angle = Math.atan2(delta.y, delta.x);
+            return angle;
+        }
+
+        function myTest(canvas, points) {
+            let ctx = canvas.getContext('2d');
+
+            // wedge indicating swept angle
+            let angle1 = getAngle(points[1], points[2]);
+            let angle2 = getAngle(points[1], points[0]);
+            console.log("pkp:  ~ file: drawAngle2.html:64 ~ myTest ~ angle1:", angle1, angle2)
+            ctx.beginPath();
+            ctx.moveTo(points[1].x, points[1].y);
+            ctx.arc(points[1].x, points[1].y, 40, angle1, angle2, true);
+            ctx.fillStyle = '#cccccc88';
+            ctx.fill();
+            console.log(angle1, angle2);
+
+            // lines
+            //
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#c3874c';
+            ctx.beginPath();
+            ctx.moveTo(points[0].x, points[0].y);
+            ctx.lineTo(points[1].x, points[1].y);
+            ctx.lineTo(points[2].x, points[2].y);
+            ctx.stroke();
+            ctx.closePath();
+
+
+        }
+    </script>
+
+</body>
+
+</html>

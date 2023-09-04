@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <title>Circle theorem2</title>
+  </head>
+  <body>
+    <p id="theorem">The opposite angles in a cyclic quadrilateral are supplementary.</p>
+    <canvas id="canvas" width="1200" height="820"></canvas>
+    <div class="slider"><input type="range" min="100" max="300" value="300" oninput="updateRadiusOfCircle(this.value)"></div> 
+    <p class="angleContainer" id="angle-a"></p>
+      <p class="angleContainer" id="angle-b"></p>
+      <p class="angleContainer" id="angle-c"></p>
+      <p class="angleContainer" id="angle-d"></p>
+      <script src="../libs/jquery.min.js"></script>
+      <script src="../libs/fabric.min.js"></script>
+      <script src="./main.js"></script>
+  </body>
+</html>

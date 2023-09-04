@@ -1,0 +1,49 @@
+.slider{
+  position: absolute;
+  top:90%;
+  left:10%;
+  }
+#theorem{
+  position: absolute;
+  left:200px;
+}
+  .angleContainer{
+    width: 60px;
+    height: 40px;
+    text-align: center;
+      padding-top: 5px;
+      font-size: 20px;
+      font-weight: bold;
+   
+  }
+
+  #angle-a{
+    position: absolute;
+    top: 482px;
+    left: 215px;
+    color:green
+  }
+  
+  #angle-b{
+    position: absolute;
+      top: 210px;
+      left: 480px;
+      color:red;
+  }
+  
+
+
+  #angle-c{
+    position: absolute;
+    top: 479px;
+    left: 747px;
+      color:green
+      
+  }
+  
+  #angle-d{
+    position: absolute;
+    top: 730px;
+    left: 480px;
+    color:red;
+  }
