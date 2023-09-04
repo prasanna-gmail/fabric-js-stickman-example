@@ -4,16 +4,16 @@
 //   width: window.innerWidth,
 //   height: window.innerHeight
 // });
-  var canvas = this.__canvas = new fabric.Canvas('canvas', { selection: false });
-     fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
+var canvas = this.__canvas = new fabric.Canvas('canvas', { selection: false });
+fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
 var globalData = {
-  top:350,
-  left:350,
-  angleA : 0,
-  angleB : 0,
-  angleC : 0,
-  angleD : 0,
+top:350,
+left:350,
+angleA : 0,
+angleB : 0,
+angleC : 0,
+angleD : 0,
 }
 var mouseDown = false;
 var circle;
@@ -37,224 +37,234 @@ var angleDcontainer = document.getElementById("angle-d");
 
 init();
 function init(){
-  draw();
+draw();
 
 
 
 
-  canvas.on({
-    "mouse:down" : selectPointerToMove,
-    "mouse:move" : startMovingSelectedPointer,
-    "mouse:up" : stopmovingAndRemoveSelectionOfPointer
-  })
+canvas.on({
+"mouse:down" : selectPointerToMove,
+"mouse:move" : startMovingSelectedPointer,
+"mouse:up" : stopmovingAndRemoveSelectionOfPointer
+})
 
 
 
-  function selectPointerToMove(o){
-    var obj = o.target;
-    mouseDown = true;
-    if(obj == null){
-      return ;
-    }else if( obj.id == "pointer1" || obj.id == "pointer2" || obj.id == "pointer3" || obj.id == "pointer4"){
-      console.log(obj);
-    }
-  }
-  function startMovingSelectedPointer(o){
-    var obj = o.target;
-    var pointer = o.pointer;
-    var x = pointer.x;
-    var y = pointer.y;
-    if(mouseDown){
-      var pos = updatePointerPosition(x,y);
-      if(obj == null){
-        return ;
-      }else if( obj.id == "pointer1" || obj.id == "pointer2" || obj.id == "pointer3" || obj.id == "pointer4"){
-        console.log(obj);
-        if(obj.id == "pointer1"){
+function selectPointerToMove(o){
+var obj = o.target;
+mouseDown = true;
+if(obj == null){
+ return ;
+}else if( obj.id == "pointer1" || obj.id == "pointer2" || obj.id == "pointer3" || obj.id == "pointer4"){
+ console.log(obj);
+}
+}
+function startMovingSelectedPointer(o){
+var obj = o.target;
+var pointer = o.pointer;
+var x = pointer.x;
+var y = pointer.y;
+if(mouseDown){
+ var pos = updatePointerPosition(x,y);
+ if(obj == null){
+   return ;
+ }else if( obj.id == "pointer1" || obj.id == "pointer2" || obj.id == "pointer3" || obj.id == "pointer4"){
+   console.log(obj);
+   if(obj.id == "pointer1"){
 
-          pointer1.set({
-            left: pos.left,
-            top : pos.top
-          })
-          pointer1.setCoords();
-          line1.set({
-            x1: pointer1.left,
-            y1 : pointer1.top
-          })
-          line1.setCoords();
-          line4.set({
-            x2: pointer1.left,
-            y2 : pointer1.top
-          })
-          line4.setCoords();
-
-
-          var udatedAngleA = calculateAngleBetweenTwoLine(line1 , line4, "L1-L4");
-          var udatedAngleB = calculateAngleBetweenTwoLine(line1 , line2, "L1-L2");
-          var udatedAngleD = calculateAngleBetweenTwoLine(line3 , line4, "L3-L4");
-          globalData.angleA = udatedAngleA; globalData.angleB = udatedAngleB; globalData.angleD = udatedAngleD;
-          console.log("udatedAngleA--->",udatedAngleA , "udatedAngleB--->",udatedAngleB , "udatedAngleD---->",udatedAngleD)
-          if(pos.top < circle.top){
-            var angleB = 180-udatedAngleB
-            angleBcontainer.innerHTML = angleB;
-            angleDcontainer.innerHTML = 180-angleB;
-          }else if(pos.top > circle.top){
-            var angleD = 180-udatedAngleB
-            angleDcontainer.innerHTML = angleD;
-            angleBcontainer.innerHTML = 180-angleD;
-          }
-         angleAcontainer.innerHTML = udatedAngleA; 
-         //angleBcontainer.innerHTML = udatedAngleB; angleDcontainer.innerHTML = udatedAngleD; 
-         angleAcontainer.style.top = (pos.top)+"px";
-         angleAcontainer.style.left = (pos.left)+"px";
-
-          
-        }
-        
-        
-        else if(obj.id == "pointer2"){
-          pointer2.set({
-            left: pos.left,
-            top : pos.top
-          })
-          pointer2.setCoords();
-          line1.set({
-            x2: pointer2.left,
-            y2 : pointer2.top
-          })
-          line1.setCoords();
-          line2.set({
-            x1: pointer2.left,
-            y1 : pointer2.top
-          })
-          line2.setCoords();
-
-          var udatedAngleA = calculateAngleBetweenTwoLine(line1 , line4, "L1-L4");
-          var udatedAngleB = calculateAngleBetweenTwoLine(line1 , line2, "L1-L2");
-          var udatedAngleC = calculateAngleBetweenTwoLine(line2 , line3, "L2-L3");
-          globalData.angleA = udatedAngleA; globalData.angleB = udatedAngleB; globalData.angleC = udatedAngleC;
-          console.log("udatedAngleA--->",udatedAngleA , "udatedAngleB--->",udatedAngleB , "udatedAngleC---->",udatedAngleC)
-          if(pos.left < circle.left){
-            var angleA = 180-udatedAngleA;
-            angleAcontainer.innerHTML = angleA;
-            angleCcontainer.innerHTML = 180-angleA; 
-          }else if(pos.left > circle.left){
-            var angleC = 180 - udatedAngleC;
-            angleCcontainer.innerHTML = angleC; 
-            angleAcontainer.innerHTML = 180-angleC; 
-          }
-
-        //  angleAcontainer.innerHTML = udatedAngleA;
-          angleBcontainer.innerHTML = udatedAngleB;
-          //  angleCcontainer.innerHTML = udatedAngleC; 
-         angleBcontainer.style.top = (pos.top)+"px";
-         angleBcontainer.style.left = (pos.left)+"px";
-        } 
-        
-        
-        else if(obj.id == "pointer3"){
-
-          pointer3.set({
-            left: pos.left,
-            top : pos.top
-          })
-          pointer3.setCoords();
-          line2.set({
-            x2: pointer3.left,
-            y2 : pointer3.top
-          })
-          line2.setCoords();
-          line3.set({
-            x1: pointer3.left,
-            y1 : pointer3.top
-          })
-          line3.setCoords();
+     pointer1.set({
+       left: pos.left,
+       top : pos.top
+     })
+     pointer1.setCoords();
+     line1.set({
+       x1: pointer1.left,
+       y1 : pointer1.top
+     })
+     line1.setCoords();
+     line4.set({
+       x2: pointer1.left,
+       y2 : pointer1.top
+     })
+     line4.setCoords();
 
 
-          var udatedAngleB = calculateAngleBetweenTwoLine(line1 , line2, "L1-L2");
-          var udatedAngleD = calculateAngleBetweenTwoLine(line3 , line4, "L1-L4");
-          var udatedAngleC = calculateAngleBetweenTwoLine(line2 , line3, "L2-L3");
-          globalData.angleD = udatedAngleD; globalData.angleB = udatedAngleB; globalData.angleC = udatedAngleC;
-          console.log("udatedAngleA--->",udatedAngleA , "udatedAngleB--->",udatedAngleB , "udatedAngleC---->",udatedAngleC)
+     var udatedAngleA = calculateAngleBetweenTwoLine(line1 , line4, "L1-L4");
+     var udatedAngleB = calculateAngleBetweenTwoLine(line1 , line2, "L1-L2");
+     var udatedAngleD = calculateAngleBetweenTwoLine(line3 , line4, "L3-L4");
+     var udatedAngleC = calculateAngleBetweenTwoLine(line2 , line3, "L2-L3");
+      globalData.angleB = udatedAngleB; globalData.angleD = udatedAngleD; globalData.angleA = 180-udatedAngleC;
+     console.log("udatedAngleA--->",udatedAngleA , "udatedAngleB--->",udatedAngleB , "udatedAngleD---->",udatedAngleD)
+     if(pos.top < circle.top){
+       var angleB = 180-udatedAngleB
+       angleBcontainer.innerHTML = angleB;
+       angleDcontainer.innerHTML = 180-angleB;
+       
+       angleAcontainer.innerHTML = 180-udatedAngleC;
+     }else if(pos.top > circle.top){
+       var angleD = 180-udatedAngleB
+       angleDcontainer.innerHTML = angleD;
+       angleBcontainer.innerHTML = 180-angleD;
+       angleAcontainer.innerHTML = 180-udatedAngleC;
+     }
+    angleAcontainer.innerHTML = udatedAngleA; 
+    //angleBcontainer.innerHTML = udatedAngleB; angleDcontainer.innerHTML = udatedAngleD; 
+    angleAcontainer.style.top = (pos.top)+"px";
+    angleAcontainer.style.left = (pos.left)+"px";
 
-          if(pos.top < circle.top){
-            var angleB = 180-udatedAngleB
-            angleBcontainer.innerHTML = angleB;
-            angleDcontainer.innerHTML = 180-angleB;
-          }else if(pos.top > circle.top){
-            var angleD = 180-udatedAngleB
-            angleDcontainer.innerHTML = angleD;
-            angleBcontainer.innerHTML = 180-angleD;
-          }
+     
+   }
+   
+   
+   else if(obj.id == "pointer2"){
+     pointer2.set({
+       left: pos.left,
+       top : pos.top
+     })
+     pointer2.setCoords();
+     line1.set({
+       x2: pointer2.left,
+       y2 : pointer2.top
+     })
+     line1.setCoords();
+     line2.set({
+       x1: pointer2.left,
+       y1 : pointer2.top
+     })
+     line2.setCoords();
 
-        //  angleDcontainer.innerHTML = udatedAngleD; angleBcontainer.innerHTML = udatedAngleB; 
-         angleCcontainer.innerHTML = udatedAngleC; 
-         angleCcontainer.style.top = (pos.top)+"px";
-         angleCcontainer.style.left = (pos.left)+"px";
+     var udatedAngleA = calculateAngleBetweenTwoLine(line1 , line4, "L1-L4");
+     var udatedAngleB = calculateAngleBetweenTwoLine(line1 , line2, "L1-L2");
+     var udatedAngleC = calculateAngleBetweenTwoLine(line2 , line3, "L2-L3");
+     var udatedAngleD = calculateAngleBetweenTwoLine(line3 , line4, "L3-L4");
+     globalData.angleA = udatedAngleA; globalData.angleB = udatedAngleB; globalData.angleC = udatedAngleC;
+     console.log("udatedAngleA--->",udatedAngleA , "udatedAngleB--->",udatedAngleB , "udatedAngleC---->",udatedAngleC)
+     if(pos.left < circle.left){
+       var angleA = 180-udatedAngleA;
+       angleAcontainer.innerHTML = angleA;
+       angleCcontainer.innerHTML = 180-angleA; 
+     }else if(pos.left > circle.left){
+       var angleC = 180 - udatedAngleC;
+       angleCcontainer.innerHTML = angleC; 
+       angleAcontainer.innerHTML = 180-angleC; 
+     }
+
+   //  angleAcontainer.innerHTML = udatedAngleA;
+     angleBcontainer.innerHTML = 180 - udatedAngleD;
+     //  angleCcontainer.innerHTML = udatedAngleC; 
+     angleBcontainer.style.top = `${pos.top}px`;
+    angleBcontainer.style.left = `${pos.left}px`;
+
+   } 
+   
+   
+   else if(obj.id == "pointer3"){
+
+     pointer3.set({
+       left: pos.left,
+       top : pos.top
+     })
+     pointer3.setCoords();
+     line2.set({
+       x2: pointer3.left,
+       y2 : pointer3.top
+     })
+     line2.setCoords();
+     line3.set({
+       x1: pointer3.left,
+       y1 : pointer3.top
+     })
+     line3.setCoords();
+
+     var udatedAngleA = calculateAngleBetweenTwoLine(line1 , line4, "L1-L2");
+     var udatedAngleB = calculateAngleBetweenTwoLine(line1 , line2, "L1-L2");
+     var udatedAngleD = calculateAngleBetweenTwoLine(line3 , line4, "L1-L4");
+     var udatedAngleC = calculateAngleBetweenTwoLine(line2 , line3, "L2-L3");
+     globalData.angleD = udatedAngleD; globalData.angleB = udatedAngleB; globalData.angleC = 180 - udatedAngleA;
+     console.log("udatedAngleA--->",udatedAngleA , "udatedAngleB--->",udatedAngleB , "udatedAngleC---->",udatedAngleC)
+
+     if(pos.top < circle.top){
+       var angleB = 180-udatedAngleB
+       angleBcontainer.innerHTML = angleB;
+       angleDcontainer.innerHTML = 180-angleB;
+       
+     }else if(pos.top > circle.top){
+       var angleD = 180-udatedAngleB
+       angleDcontainer.innerHTML = angleD;
+       angleBcontainer.innerHTML = 180-angleD;
+     }
+
+   //  angleDcontainer.innerHTML = udatedAngleD; angleBcontainer.innerHTML = udatedAngleB; 
+   //  angleCcontainer.innerHTML = udatedAngleC; 
+   angleCcontainer.innerHTML = globalData.angleC;
+    angleCcontainer.style.top = `${pos.top}px`;
+    angleCcontainer.style.left = `${pos.left}px`;
 
 
-        }
-        
-        
-        
-        else if(obj.id == "pointer4"){
-          pointer4.set({
-            left: pos.left,
-            top : pos.top
-          })
-          pointer4.setCoords();
+   }
+   
+   
+   
+   else if(obj.id == "pointer4"){
+     pointer4.set({
+       left: pos.left,
+       top : pos.top
+     })
+     pointer4.setCoords();
 
-          line4.set({
-            x1: pointer4.left,
-            y1 : pointer4.top
-          })
-          line4.setCoords();
-          line3.set({
-            x2: pointer4.left,
-            y2 : pointer4.top
-          })
-          line3.setCoords();
+     line4.set({
+       x1: pointer4.left,
+       y1 : pointer4.top
+     })
+     line4.setCoords();
+     line3.set({
+       x2: pointer4.left,
+       y2 : pointer4.top
+     })
+     line3.setCoords();
 
-          var udatedAngleA = calculateAngleBetweenTwoLine(line1 , line4, "L1-L2");
-          var udatedAngleC = calculateAngleBetweenTwoLine(line2 , line3, "L2-L3");
-          var udatedAngleD = calculateAngleBetweenTwoLine(line3 , line4, "L1-L4");
-           globalData.angleA = udatedAngleA; globalData.angleC = udatedAngleC; globalData.angleD = udatedAngleD;
-          console.log("udatedAngleA--->",udatedAngleA , "udatedAngleB--->",udatedAngleB , "udatedAngleC---->",udatedAngleC)
+     var udatedAngleA = calculateAngleBetweenTwoLine(line1 , line4, "L1-L4");
+     var udatedAngleB = calculateAngleBetweenTwoLine(line1 , line2, "L1-L2");
+     var udatedAngleC = calculateAngleBetweenTwoLine(line2 , line3, "L2-L3");
+     var udatedAngleD = calculateAngleBetweenTwoLine(line3 , line4, "L1-L4");
+      globalData.angleA = udatedAngleA; globalData.angleC = udatedAngleC; globalData.angleD = udatedAngleD;
+     console.log("udatedAngleA--->",udatedAngleA , "udatedAngleB--->",udatedAngleB , "udatedAngleC---->",udatedAngleC)
 
-          if(pos.left < circle.left){
-            var angleA = 180-udatedAngleA;
-            angleAcontainer.innerHTML = angleA;
-            angleCcontainer.innerHTML = 180-angleA; 
-          }else if(pos.left > circle.left){
-            var angleC = 180 - udatedAngleC;
-            angleCcontainer.innerHTML = angleC; 
-            angleAcontainer.innerHTML = 180-angleC; 
-          }
+     if(pos.left < circle.left){
+       var angleA = 180-udatedAngleA;
+       angleAcontainer.innerHTML = angleA;
+       angleCcontainer.innerHTML = 180-angleA; 
+     }else if(pos.left > circle.left){
+       var angleC = 180 - udatedAngleC;
+       angleCcontainer.innerHTML = angleC; 
+       angleAcontainer.innerHTML = 180-angleC; 
+     }
 
-          // angleAcontainer.innerHTML = udatedAngleA; angleCcontainer.innerHTML = udatedAngleC; 
-          angleDcontainer.innerHTML = udatedAngleD;
-         angleDcontainer.style.top = (pos.top)+"px";
-         angleDcontainer.style.left = (pos.left)+"px";
+     // angleAcontainer.innerHTML = udatedAngleA; angleCcontainer.innerHTML = udatedAngleC; 
+     angleDcontainer.innerHTML = 180 - udatedAngleB;
+     angleDcontainer.style.top = `${pos.top}px`;
+     angleDcontainer.style.left = `${pos.left}px`;
 
 
-        }
-      }
 
-    }
-    
-  }
+   }
+ }
 
-  function stopmovingAndRemoveSelectionOfPointer(o){
-    var obj = o.target;
+}
 
-    if(obj == null){
-      mouseDown = false;
-      return ;
-    }else if( obj.id == "pointer1" || obj.id == "pointer2" || obj.id == "pointer3" || obj.id == "pointer4"){
-      console.log(obj);
-    }
-    mouseDown = false;
-  }
+}
+
+function stopmovingAndRemoveSelectionOfPointer(o){
+var obj = o.target;
+
+if(obj == null){
+ mouseDown = false;
+ return ;
+}else if( obj.id == "pointer1" || obj.id == "pointer2" || obj.id == "pointer3" || obj.id == "pointer4"){
+ console.log(obj);
+}
+mouseDown = false;
+}
 
 }
 
@@ -300,155 +310,155 @@ angleDcontainer.style.left = pointer4.left+"px";
 }
 
 function updatePointerPosition(x , y) {
-  // console.log("updatePointerPosition--->",o)
-  
-
-  var deltaLeft = x - circle.left;
-  var deltaTop = y - circle.top;
-
-  var length = Math.sqrt(deltaLeft * deltaLeft + deltaTop * deltaTop);
-  console.log("length--->", length)
-
-  var radians = Math.atan2(deltaTop, deltaLeft)
-
-  var ang = radians * 180 / Math.PI;
-  length = circle.radius;
-
-  var left = Math.cos(radians) * length + circle.left;
-  var top = Math.sin(radians) * length + circle.top;
+// console.log("updatePointerPosition--->",o)
 
 
-  var obj = {
-    left: left,
-    top: top,
-    ang: ang
-  }
-  return obj;
+var deltaLeft = x - circle.left;
+var deltaTop = y - circle.top;
+
+var length = Math.sqrt(deltaLeft * deltaLeft + deltaTop * deltaTop);
+console.log("length--->", length)
+
+var radians = Math.atan2(deltaTop, deltaLeft)
+
+var ang = radians * 180 / Math.PI;
+length = circle.radius;
+
+var left = Math.cos(radians) * length + circle.left;
+var top = Math.sin(radians) * length + circle.top;
+
+
+var obj = {
+left: left,
+top: top,
+ang: ang
+}
+return obj;
 }
 
 
 function createCircleOnCanvas(left , top , radius , color , stroke, selectable , id){
 return new fabric.Circle({
-  id: id,
-  radius: radius,
-  fill: color,
-  stroke: stroke,
-  strokeWidth: 5,
-  top: top,
-  left: left,
-  originX: 'center',
-  originY: 'center',
-  selectable: selectable,
-  hasControls: false,
+id: id,
+radius: radius,
+fill: color,
+stroke: stroke,
+strokeWidth: 5,
+top: top,
+left: left,
+originX: 'center',
+originY: 'center',
+selectable: selectable,
+hasControls: false,
 
 })
 }
 
 function createLineOnCanvas( x1 , y1, x2, y2 , color , id){
-  return new fabric.Line([x1, y1, x2, y2], {
-    id: id,
-    stroke: color,
-    strokeWidth: 3,
-    selectable: false,
-    hasControls: false
-  })
+return new fabric.Line([x1, y1, x2, y2], {
+id: id,
+stroke: color,
+strokeWidth: 3,
+selectable: false,
+hasControls: false
+})
 }
 
 function calculateAngleBetweenTwoLine(l1 , l2 , callee){
-  console.warn("l1-x1==>",l1.x1, " l1-y1==>",l1.y1);
-  console.warn("l1-x2==>",l1.x2, " l1-y2==>",l1.y2);
-  console.warn("l2-x1==>",l2.x1, " l2-y1==>",l2.y1);
-  console.warn("l2-x2==>",l2.x2, " l2-y2==>",l2.y2);
-  var slopOfLine1 = (l1.y2 - l1.y1) / (l1.x2 - l1.x1); 
-  var slopOfLine2 = (l2.y2 - l2.y1) / (l2.x2 - l2.x1); 
-  var actualAngle ;
-  var tangentOfBothLine = (slopOfLine2 - slopOfLine1)/(1 + slopOfLine1 * slopOfLine2) 
+console.warn("l1-x1==>",l1.x1, " l1-y1==>",l1.y1);
+console.warn("l1-x2==>",l1.x2, " l1-y2==>",l1.y2);
+console.warn("l2-x1==>",l2.x1, " l2-y1==>",l2.y1);
+console.warn("l2-x2==>",l2.x2, " l2-y2==>",l2.y2);
+var slopOfLine1 = (l1.y2 - l1.y1) / (l1.x2 - l1.x1); 
+var slopOfLine2 = (l2.y2 - l2.y1) / (l2.x2 - l2.x1); 
+var actualAngle ;
+var tangentOfBothLine = (slopOfLine2 - slopOfLine1)/(1 + slopOfLine1 * slopOfLine2) 
 
-  var angleBetweenLine1 =  Math.atan(tangentOfBothLine)*180/Math.PI;
-  var angleBetweenLine2 = angleBetweenLine1.toFixed();
-  var angleBetweenLine = parseInt(angleBetweenLine2);
-  console.log(angleBetweenLine)
- 
+var angleBetweenLine1 =  Math.atan(tangentOfBothLine)*180/Math.PI;
+var angleBetweenLine2 = angleBetweenLine1.toFixed();
+var angleBetweenLine = parseInt(angleBetweenLine2);
+console.log(angleBetweenLine)
 
-  console.log("type of angleBetweenLine--->",typeof(angleBetweenLine))
+
+console.log("type of angleBetweenLine--->",typeof(angleBetweenLine))
 
 
 // globalData.angleBetweenL3AndL4 = Math.abs(angleBetweenLine);
 // angleLine3AndLine4.innerHTML = globalData.angleBetweenL3AndL4+"\u00B0";
- 
-  var returnAngleBetweenLine = Math.abs(angleBetweenLine)
-  return returnAngleBetweenLine;
+
+var returnAngleBetweenLine = Math.abs(angleBetweenLine)
+return returnAngleBetweenLine;
 }
 
 
 const updateRadiusOfCircle = (obj) =>{
-  var pointer1pos = updatePointerPosition(pointer1.left , pointer1.top);
-  var pointer2pos = updatePointerPosition(pointer2.left , pointer2.top);
-  var pointer3pos = updatePointerPosition(pointer3.left , pointer3.top);
-  var pointer4pos = updatePointerPosition(pointer4.left , pointer4.top);
+var pointer1pos = updatePointerPosition(pointer1.left , pointer1.top);
+var pointer2pos = updatePointerPosition(pointer2.left , pointer2.top);
+var pointer3pos = updatePointerPosition(pointer3.left , pointer3.top);
+var pointer4pos = updatePointerPosition(pointer4.left , pointer4.top);
 
-  console.warn("pointer 3 pos====>",pointer3pos )
-  // console.log(pos)
-  var obj = parseInt(obj)
-  circle.set({
-    radius:obj
-  })
+console.warn("pointer 3 pos====>",pointer3pos )
+// console.log(pos)
+var obj = parseInt(obj)
+circle.set({
+radius:obj
+})
 
-  line1.set({
-    x1:pointer1pos.left,
-    y1:pointer1pos.top,
-    x2:pointer2pos.left,
-    y2:pointer2pos.top,
-  })
-  line2.set({
-    x1:pointer2pos.left,
-    y1:pointer2pos.top,
-    x2:pointer3pos.left,
-    y2:pointer3pos.top
-  })
-  line3.set({
-    y1:pointer3pos.top,
-    x1:pointer3pos.left,
-    x2:pointer4pos.left,
-    y2:pointer4pos.top
-  })
-  line4.set({
-    x1:pointer4pos.left,
-    y1:pointer4pos.top,
-    x2:pointer1pos.left,
-    y2:pointer1pos.top,
-  })
+line1.set({
+x1:pointer1pos.left,
+y1:pointer1pos.top,
+x2:pointer2pos.left,
+y2:pointer2pos.top,
+})
+line2.set({
+x1:pointer2pos.left,
+y1:pointer2pos.top,
+x2:pointer3pos.left,
+y2:pointer3pos.top
+})
+line3.set({
+y1:pointer3pos.top,
+x1:pointer3pos.left,
+x2:pointer4pos.left,
+y2:pointer4pos.top
+})
+line4.set({
+x1:pointer4pos.left,
+y1:pointer4pos.top,
+x2:pointer1pos.left,
+y2:pointer1pos.top,
+})
 
-  pointer1.set({
-    top: pointer1pos.top,
-    left : pointer1pos.left,
-    radius: obj/60
-  })
-  pointer2.set({
-    top: pointer2pos.top,
-    left : pointer2pos.left,
-    radius: obj/60
-  })
-  pointer3.set({
-    top: pointer3pos.top,
-    left : pointer3pos.left,
-    radius: obj/60
-  })
-  pointer4.set({
-    top: pointer4pos.top,
-    left : pointer4pos.left,
-    radius: obj/60
-  })
+pointer1.set({
+top: pointer1pos.top,
+left : pointer1pos.left,
+radius: obj/25
+})
+pointer2.set({
+top: pointer2pos.top,
+left : pointer2pos.left,
+radius: obj/25
+})
+pointer3.set({
+top: pointer3pos.top,
+left : pointer3pos.left,
+radius: obj/25
+})
+pointer4.set({
+top: pointer4pos.top,
+left : pointer4pos.left,
+radius: obj/25
+})
 
-  pointer1.setCoords();
-  pointer2.setCoords();
-  pointer3.setCoords();
-  pointer4.setCoords();
-  line1.setCoords();
-  line2.setCoords();
-  line3.setCoords();
-  line4.setCoords();
-  circle.setCoords();
+pointer1.setCoords();
+pointer2.setCoords();
+pointer3.setCoords();
+pointer4.setCoords();
+line1.setCoords();
+line2.setCoords();
+line3.setCoords();
+line4.setCoords();
+circle.setCoords();
 canvas.requestRenderAll();
 angleAcontainer.style.top = pointer1.top+"px";
 angleAcontainer.style.left = pointer1.left+"px";
