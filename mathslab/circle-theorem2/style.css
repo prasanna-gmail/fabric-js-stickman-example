@@ -6,6 +6,7 @@
 #theorem{
   position: absolute;
   left:200px;
+  font-size: 20px;
 }
   .angleContainer{
     width: 60px;

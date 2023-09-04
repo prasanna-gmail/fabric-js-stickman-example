@@ -441,15 +441,18 @@ const updateRadiusOfCircle = (obj) =>{
   })
   pointer2.set({
     top: pointer2pos.top,
-    left : pointer2pos.left
+    left : pointer2pos.left,
+    radius:obj/25
   })
   pointer3.set({
     top: pointer3pos.top,
-    left : pointer3pos.left
+    left : pointer3pos.left,
+    radius:obj/25
   })
   pointer4.set({
     top: pointer4pos.top,
-    left : pointer4pos.left
+    left : pointer4pos.left,
+    radius:obj/25
   })
 
   circleArc2.set({
