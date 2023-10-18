@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Angle show</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+
+<body>
+
+    <!-- <div class="todo">
+        <pre>
+          <b>TODO:</b>
+            . init set the points
+            . Add new angle
+            . Show angles in Text
+            . Show other angles on click
+            . Restrict movement min max
+         <sub> Anything left?</sub>
+        </pre>
+    </div> -->
+
+    <!-- partial:index.partial.html -->
+   
+    <div class="canvas-wrapper">
+        
+      
+    <canvas id="c" width="1200" height="800"></canvas>
+    <div class="controls">
+        <div class="resetBtn" onclick="resetCanvas()">Reset</div>
+        <div class="addBtn" id="addBtn" onclick="addNewLine(this)">+</div>
+        <div class="removeBtn" onclick="removeLine(this)">-</div>
+    </div>
+    <!-- <div class="angle-main-container">
+        <div class="angle" id="angle_1"></div>
+    </div> -->
+    <!-- <div class="display-size-btn">
+        <div class="disply-btn" id="dis-1024*768" value="1024*768">1024*768</div>
+        <div class="disply-btn" id="dis-1440*900" >1440*900</div>
+        <div class="disply-btn" id="dis-1680*1050" >1680*1050</div>
+        <div class="disply-btn" id="dis-1920*1080" >1920*1080</div>
+    </div> -->
+</div>
+    <!-- partial -->
+
+    <script src="../libs/jquery.min.js"></script>
+    <script src="../libs/fabric.min.js"></script>
+    <script src="./utilsGlobal.js"></script>
+    <script src="./script.js"></script>
+
+</body>
+
+</html>

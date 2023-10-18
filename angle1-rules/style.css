@@ -1,0 +1,79 @@
+body{
+    user-select: none;
+}
+
+.canvas-wrapper{
+    position: relative;
+    top: 150px;
+    width: 73%;
+    left: 20%;
+}
+.angle-main-container{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: auto;
+}
+.angle{
+    position: absolute;
+    width: 3%;
+    text-align: center;
+    height: auto;
+    font-size: 1vw;
+    background-color: rgb(85, 83, 83);
+    opacity: 0.7;
+    color: white;
+    border: 1px solid black;
+    border-radius: 24px;
+
+}
+.display-size-btn{
+    position: absolute;
+    width: 40%;
+    top: 85%;
+    left: 75%;
+    height: auto;
+}
+.disply-btn{
+position: relative;
+display: inline-block;
+width: 20%;
+height: auto;
+font-size: 1vw;
+border: 1px solid black;
+border-radius: 5px;
+background-color: black;
+color: white;
+cursor: pointer;
+text-align: center;
+}
+.controls{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25%;
+    height: auto;
+}
+.resetBtn,.addBtn, .removeBtn{
+    position: relative;
+    left: 10%;
+    background-color: aquamarine;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: auto;
+    text-align: center;
+    font-size: 2vw;
+    cursor: pointer;
+}
+
+.resetBtn{
+    top: 5%;
+    width: 60%;
+}
+.addBtn, .removeBtn{
+    top: 7px;
+    width: 29%;
+    display: inline-block;
+    font-weight: bolder;
+    
+}
