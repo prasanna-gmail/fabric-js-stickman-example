@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>    
+<head>
+    <meta charset="utf-8">
+    <title>Exterior Angles Tool</title>
+	<link rel="stylesheet" type="text/css" href="./holderStyleSheet.css">
+	<script>
+		var task = []; // tasks that appear in this holder - the array entries must match the filenames
+		var finalOutputLevel = 15 // a number corresponding to the difficulty of the tasks, which will determine points earned
+		var holderTaskId = 155; //taskId for database
+		var taskName = "Exterior Angles Tool"; // taskName for database
+		var taskOrTool = 'tool';
+		var taskPen = [];
+		var taskKey = [];
+		
+	
+		 task[0] = './js/j345exteriorAnglesTool';
+				
+		
+		
+
+		
+		
+	</script>
+</head>
+ 
+<body>
+<div id="hideMe" style="font-family:'Hobo'">.</div>
+<div class="wrapper">
+  <div class="container">
+    <div class="canvas-container" id="canvascontainer">
+      <canvas id="canvas" width="1200" height="700" left="0" top="0" style="z-index:1"></canvas>
+      <canvas class="holderButton" id="holderPrevButton" width="210" height="68" left="0" top="0"></canvas>
+      <canvas class="holderButton" id="holderReloadButton" width="190" height="68" left="0" top="0"></canvas>
+      <canvas class="holderButton" id="holderNextButton" width="210" height="68" left="0" top="0"></canvas>
+      <canvas class="holderButton" id="holderHomeButton" width="74" height="68" left="0" top="0"></canvas>
+      <canvas class="holderButton" id="holderQuestionNum" width="66" height="68" left="0" top="0"></canvas>
+      <canvas id="inactiveBox" width="400" height="120" left="0" top="0"></canvas>      
+      <canvas id="userInfoText" width="343" height="62" left="0" top="0"></canvas>
+      <canvas class="holderButton" id="penColourBlack" width="65" height="60" left="0" top="0"></canvas>
+      <canvas class="holderButton" id="penColourBlue" width="65" height="60" left="0" top="0"></canvas>
+      <canvas class="holderButton" id="penColourRed" width="65" height="60" left="0" top="0"></canvas>
+      <canvas class="holderButton" id="penColourGreen" width="65" height="60" left="0" top="0"></canvas>
+      <canvas class="holderButton" id="penOff" width="65" height="60" left="0" top="0"></canvas>
+      <canvas class="holderButton" id="penClear" width="65" height="60" left="0" top="0"></canvas>
+     
+      <script src="./holder.js"></script>
+      <!-- <script src="./js/j345exteriorAnglesTool.js"></script> -->
+    </div>
+  </div>
+</div>
+        
+</body>
+
+</html>

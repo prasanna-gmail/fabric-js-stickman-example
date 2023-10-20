@@ -1,0 +1,163 @@
+{
+    "title": "Graphing Tool",
+    "keyboard": "gridKeyboard",
+    "free": true,
+    "resources": [
+        {
+            "name": "GraphingTool",
+            "type": "slides",
+            "pages": [
+                {
+                    "paths": [
+                        {
+                            "obj": [
+                                {
+                                    "type": "grid3",
+                                    "left": 100,
+                                    "top": 50,
+                                    "width": 600,
+                                    "height": 600,
+                                    "xMin": -5,
+                                    "xMax": 5,
+                                    "yMin": -5,
+                                    "yMax": 5,
+                                    "xMajorStep": 1,
+                                    "xMinorStep": 1,
+                                    "yMajorStep": 1,
+                                    "yMinorStep": 1,
+                                    "xZero": 250,
+                                    "yZero": 350,
+                                    "showGrid": true,
+                                    "showBorder": false,
+                                    "controlsOffsetPos": [
+                                        528.72,
+                                        -31.898
+                                    ],
+                                    "path": [
+                                        {
+                                            "type": "function",
+                                            "text": [
+                                                ""
+                                            ],
+                                            "placeholder": true,
+                                            "color": "#00F",
+                                            "lineWidth": 3
+                                        }
+                                    ],
+                                    "showAxes": true,
+                                    "showScales": true,
+                                    "showLabels": true,
+                                    "originStyle": "circle",
+                                    "id": "grid",
+                                    "vars": {},
+                                    "fontSize": 28,
+                                    "inequalitiesShadeOut": false,
+                                    "interact": {
+                                        "controlsStyle": "custom",
+                                        "lineWidth": 4,
+                                        "plotStyle": "circle",
+                                        "buttons": [
+                                            {
+                                                "type": "move",
+                                                "pos": [
+                                                    850,
+                                                    25
+                                                ]
+                                            },
+                                            {
+                                                "type": "zoomIn",
+                                                "pos": [
+                                                    900,
+                                                    25
+                                                ]
+                                            },
+                                            {
+                                                "type": "zoomOut",
+                                                "pos": [
+                                                    950,
+                                                    25
+                                                ]
+                                            },
+                                            {
+                                                "type": "pdf",
+                                                "pos": [
+                                                    1000,
+                                                    25
+                                                ]
+                                            },
+                                            {
+                                                "type": "viewMenu",
+                                                "pos": [
+                                                    1050,
+                                                    25
+                                                ]
+                                            },
+                                            {
+                                                "type": "pointCircle",
+                                                "pos": [
+                                                    850,
+                                                    75
+                                                ]
+                                            },
+                                            {
+                                                "type": "lineSegment",
+                                                "pos": [
+                                                    900,
+                                                    75
+                                                ]
+                                            },
+                                            {
+                                                "type": "line",
+                                                "pos": [
+                                                    950,
+                                                    75
+                                                ]
+                                            },
+                                            {
+                                                "type": "lineDash",
+                                                "pos": [
+                                                    1000,
+                                                    75
+                                                ]
+                                            },
+                                            {
+                                                "type": "colorPicker",
+                                                "pos": [
+                                                    1050,
+                                                    75
+                                                ]
+                                            }
+                                        ],
+                                        "buttonSize": 50,
+                                        "functionListRect": [
+                                            775,
+                                            150,
+                                            400,
+                                            525
+                                        ],
+                                        "colorPickerPos": [
+                                            1040,
+                                            135
+                                        ],
+                                        "color": "#00F"
+                                    }
+                                }
+                            ],
+                            "selected": false
+                        }
+                    ],
+                    "margins": [
+                        20,
+                        20
+                    ],
+                    "showTrayDrawButtons": false
+                }
+            ]
+        },
+        {
+            "name": "GraphingInequalitiesTool",
+            "type": "link",
+            "url": "/i2/teach.php?id=graphingInequalitiesTool"
+        }
+    ]
+}

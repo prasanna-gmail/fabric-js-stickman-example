@@ -1,0 +1,468 @@
+.loadTeachFileMenu-background-div{
+	position: absolute;
+	z-index: 10000;
+	background-color: #C9F;
+	border: solid #000 2px;
+	border-radius: 15px;
+	overflow: none;
+}
+.loadTeachFileMenu-title-p{
+	margin:0;
+}
+.loadTeachFileMenu-title-input{
+	display: inline-block;
+	width: 50%;
+	margin: 5 0 5 0;
+	border: solid black 1px;
+	padding: 2px 5px;
+}
+.loadTeachFileMenu-title-div{
+	float: left;
+	margin: 4px 0 0 10px;
+	background: none;
+	border: none;
+	font-size: large;
+	font-weight: bold;	
+	font-family: Arial;	
+}
+.loadTeachFileMenu-close{
+	float: right;
+	margin: 1px 3px 0 0;
+	background: none;
+	border: none;
+	font-size: large;
+	font-weight: bold;
+	cursor: pointer;	
+}
+.loadTeachFileMenu-menu-div{
+	padding: 5px 10px;
+}
+.loadTeachFileMenu-menu-tab{
+	width: 45%;
+	background-color: #FCF;
+	border: 2px solid black;
+	border-radius: 5px;
+	padding: 5px;
+	font: 16px Arial;
+	pointer-events: auto;
+	cursor: pointer;
+	display: inline-block;	
+}
+.loadTeachFileMenu-files-div{
+	overflow-y: auto;
+	overflow-x: none;
+	height: 85%;	
+}
+.loadTeachFileMenu-file-div{
+	display: inline-block;
+	border: solid #000 2px;
+	overflow: hidden;
+	background-color: #FFF;
+	margin: 0 0 -2px -2px;
+	pointer-events: auto;
+	cursor: pointer;
+	padding: 0 0;
+}
+.loadTeachFileMenu-file-image{
+	border: 1px black solid;
+	width: 90%;
+	pointer-events: none;
+}
+.loadTeachFileMenu-file-p{
+    margin: 5px 0 5px 0;
+	pointer-events: none;
+	text-align: left;
+	padding: 0 5%;
+	font: 14px Arial;
+}
+
+.fileDialog-background-div{
+	position: absolute;
+	z-index: 100000000000;
+	background-color: #C9F;
+	border: solid #000 2px;
+	border-radius: 15px;
+	overflow: none;
+}
+.fileDialog-title-div{
+    width: 100%;
+	text-align: left;
+}
+.fileDialog-title{
+	text-align: left;
+    margin: 4px 0 0 10px;
+    font-weight: bold;
+    font-family: Arial;
+	width: 24%;
+    display: inline-block;
+}
+.fileDialog-input{
+	display: inline-block;
+	width: 40%;
+	margin: 5 0 5 15;
+	border: solid black 1px;
+	padding: 2px 5px;
+}
+.fileDialog-save{
+	display: inline-block;
+	width: 10%;
+	margin: 5 0 5 15;
+	border: solid black 1px;
+	padding: 2px 5px;
+	background-color:#9FF;
+	font-weight:bold;
+	cursor:pointer;
+}
+.fileDialog-close{
+    float: right;
+    margin: 0px 15px 0 0;
+    background: none;
+    border: none;
+    font-size: medium;
+    font-weight: bold;
+    cursor: pointer;
+}
+.fileDialog-menu-div{
+	padding: 5px 10px;
+}
+.fileDialog-menu-tab{
+	width: 45%;
+	background-color: #FCF;
+	border: 2px solid black;
+	border-radius: 5px;
+	padding: 5px;
+	font: 16px Arial;
+	pointer-events: auto;
+	cursor: pointer;
+	display: inline-block;	
+}
+.fileDialog-folder-div{
+	border: solid #000 1px;
+	overflow: hidden;
+	background-color: #FFF;
+	margin: 1px 5%;
+	pointer-events: auto;
+	cursor: pointer;
+	padding: 2px 0;
+	font-family: Arial;
+	font-size: small;
+}
+.fileDialog-files-div{
+	overflow-y: auto;
+	overflow-x: none;
+	height: 85%;	
+}
+.fileDialog-file-div{
+	border: solid #000 1px;
+	overflow: hidden;
+	background-color: #FFF;
+	margin: 1px 5%;
+	pointer-events: auto;
+	cursor: pointer;
+	padding: 2px 0;
+	font-family: Arial;
+	text-align:left;
+	font-size: small;
+}
+.fileDialog-file-name {
+	display:inline-block;
+	width:55%;
+	margin-left:1%;
+	text-align:left;
+	font-size: small;
+}
+.fileDialog-file-load {
+	display:inline-block;
+	width:10%;
+	margin-left:1%;
+	text-align:center;
+	font-size: small;
+	font-style:italic;
+	font-weight:bold;
+	color:#000;
+	pointer-events: auto;
+	cursor: pointer;
+}
+.fileDialog-file-url {
+	display:inline-block;
+	width:10%;
+	margin-left:1%;
+	text-align:center;
+	font-size: small;
+	font-style:italic;
+	color:#060;
+	pointer-events: auto;
+	cursor: pointer;
+}
+.fileDialog-file-rename {
+	display:inline-block;
+	width:10%;
+	margin-left:1%;
+	text-align:center;
+	font-size: small;
+	font-style:italic;
+	color:#00F;
+	pointer-events: auto;
+	cursor: pointer;
+}
+.fileDialog-file-delete {
+	display:inline-block;
+	width:10%;
+	margin-left:1%;
+	text-align:center;
+	font-size: small;
+	font-style:italic;
+	color:#F00;
+	pointer-events: auto;
+	cursor: pointer;
+}
+.fileDialog-file-image{
+	border: 1px black solid;
+	width: 90%;
+	pointer-events: none;
+}
+.fileDialog-file-p{
+    margin: 5px 0 5px 0;
+	pointer-events: none;
+	text-align: left;
+	padding: 0 5%;
+	font: 14px Arial;
+}
+.fileDialog-left-div{
+    display: inline-block;
+	background-color:#FFE;
+	float: left;
+	width: 20%;
+	vertical-align: top;
+	overflow: auto;
+	border:1px solid black;
+	margin-left:2%;
+	margin-top:20px;
+	height:80%;
+}
+.fileDialog-right-div{
+    display: inline-block;
+	background-color:#FFE;
+	float: left;
+	left:22.5%;
+	width: 75%;
+	vertical-align: top;
+	overflow: auto;
+	border:1px solid black;
+	margin-top:20px;
+	height:80%;
+}
+.fileDialog-folder-select{
+	width:80%;
+}
+.fileDialog-title2 {
+	text-align: center;
+    width: 100%;
+	margin: 3px 0;
+    background: none;
+    border: none;
+    font-weight: bold;
+    font-family: Arial;	
+}
+
+.fileMenu-background-div{
+	position: absolute;
+	z-index: 100000000000;
+	background-color: #C9F;
+	border: solid #000 2px;
+	border-radius: 15px;
+	overflow: none;
+}
+.fileMenu-title-p{
+	margin:0;
+}
+.fileMenu-title-input{
+	display: inline-block;
+	width: 50%;
+	margin: 5 0 5 0;
+	border: solid black 1px;
+	padding: 2px 5px;
+}
+.fileMenu-title-div{
+	float: left;
+	margin: 4px 0 0 10px;
+	background: none;
+	border: none;
+	font-size: 0.8em;
+	font-weight: bold;	
+	font-family: Arial;	
+}
+.fileMenu-close{
+	float: right;
+	margin: 1px 3px 0 0;
+	background: none;
+	border: none;
+	font-size: 0.8em;
+	font-weight: bold;
+	cursor: pointer;	
+}
+.fileMenu-menu-div{
+	padding: 5px 10px;
+}
+.fileMenu-menu-tab{
+	width: 45%;
+	background-color: #FCF;
+	border: 2px solid black;
+	border-radius: 5px;
+	padding: 5px;
+	font: 16px Arial;
+	pointer-events: auto;
+	cursor: pointer;
+	display: inline-block;	
+}
+.fileMenu-files-div{
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: 85%;	
+	position: absolute;
+	top: 40px;
+	left: 0;
+	width: 100%;
+}
+.fileMenu-head-table-div{
+	overflow-y: hidden;
+	overflow-x: hidden;
+	width: 100%;
+}
+.fileMenu-body-table-div{
+	overflow-y: auto;
+	overflow-x: hidden;
+	width: 100%;
+	/*height:85%;*/
+}
+.fileMenu-file-div{
+	display: inline-block;
+	border: solid #000 2px;
+	overflow: hidden;
+	background-color: #FFF;
+	margin: 0 0 -2px -2px;
+	pointer-events: auto;
+	cursor: pointer;
+	padding: 0 0;
+}
+.fileMenu-file-p{
+    margin: 5px 0 5px 0;
+	pointer-events: none;
+	text-align: left;
+	padding: 0 5%;
+	font: 14px Arial;
+}
+.fileMenu-table {
+	background-color: #FFF;
+    border-collapse: collapse;
+	font-size:0.8em;
+	font-family:Arial;
+	width:100%;
+}
+.fileMenu-table td {
+    /*border: 1px solid black;*/
+	padding: 0 5px;
+}
+.fileMenu-table thead {
+	font-weight: bold;
+	background-color: #CCF;
+}
+
+
+#feedback-div{
+	background-color: #9F9;
+	position: absolute;
+	z-index: 9500;
+	border: solid #000 2px;
+	border-radius: 15px;
+	overflow: none;
+}
+#feedback-h2{
+	font: 16px Arial;
+	margin: 12px 0 13px 0;
+}
+#feedback-close{
+	float: right;
+    margin: 3px 10px 0 0;
+	pointer-events: auto;
+	cursor: pointer;	
+}
+#feedback-textarea-div{
+	float: left;
+	width: 90%;
+	height: 70%;
+	margin: 0 5%;
+}
+#feedback-textarea{
+	width:100%;
+	height:100%;
+}
+#feedback-textarea-post-div{
+	clear:both;
+}
+#feedback-textarea-submit{
+	background-color: #F90;
+    padding: 3px 8px;
+    display: inline-block;
+    float: right;
+    margin-right: 5%;
+    margin-top: 2%;
+    border: 2px solid black;
+    border-radius: 5px;
+    font: 16px Arial;	
+	pointer-events: auto;
+	cursor: pointer;
+}
+.pathList-div{
+	position: absolute;
+	z-index: 9000;
+	background-color: #C9F;
+	border: solid #000 2px;
+	border-radius: 0px;
+	overflow: none;
+}
+.pathList-title-div{
+	height: 5%;
+	pointer-events: auto;
+	vertical-align: middle;
+	font-weight: bold;
+    font-family: Arial;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pathList-content-div{
+	overflow-y: auto;
+	overflow-x: none;
+	height: 95%;	
+}
+.pathList-path-div{
+	display: block;
+	border: solid #000 2px;
+	overflow: hidden;
+	margin: 2px 5px;
+	pointer-events: auto;
+	cursor: pointer;
+	padding: 0 0;
+}
+.pathList-path-p{
+    margin: 5px 0 5px 0;
+	pointer-events: none;
+	text-align: left;
+	padding: 0 5%;
+	font-family: Arial;
+    font-size: 0.6em;
+}
+.pathList-obj-p{
+    margin: 5px 0 5px 0;
+	pointer-events: none;
+	text-align: left;
+	padding: 0 5%;
+	font-family: Arial;
+    font-size: 0.6em;
+}
+.pathList-obj-id{
+	font-weight:bold;
+	font-style:italic;
+}

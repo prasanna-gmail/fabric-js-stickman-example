@@ -1,0 +1,192 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: auto auto auto auto;
+	background-color: #ffdc9a;
+	border: 0;
+	text-align: center;
+	overflow: hidden; /*  Disable scrollbars */
+}
+@font-face {
+    font-family: 'Hobo';
+    src: url('fonts/hobo-webfont.eot');
+    src: url('fonts/hobo-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/hobo-webfont.woff') format('woff'),
+         url('fonts/hobo-webfont.ttf') format('truetype'),
+         url('fonts/hobo-webfont.svg#hoboregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* segoePrint */
+@font-face {
+    /* This declaration targets everything else */
+    font-family: 'segoePrint';
+    src:url('fonts/segeo-print-webfont.woff') format('woff'),
+		url('fonts/segeo-print-webfont.ttf') format('truetype'),
+		url('fonts/segeo-print-webfont.svgz#SegoePrintRegular') format('svg'),
+		url('fonts/segeo-print-webfont.svg#SegoePrintRegular') format('svg'),
+		url('fonts/segeo-print-webfont.eot');
+    	font-weight: normal;
+    	font-style: normal;
+}
+
+/* smileyMonster */
+/* @font-face {
+    font-family: 'smileyMonster';
+    src:url('fonts/smileymonster.woff') format('woff'),
+		url('fonts/smileymonster.ttf') format('truetype'),
+        url('fonts/smileymonster.svg#Smiley-Monster') format('svg'),
+        url('fonts/smileymonster.eot'),
+        url('fonts/smileymonster.eot?#iefix') format('embedded-opentype'); 
+        font-weight: normal;
+        font-style: normal;
+} */
+
+.wrapper {
+   display: table;
+   padding: 0;
+   width: 100%;
+   height: 100%;
+   position: absolute;
+}
+.container {
+   display: table-cell;
+   vertical-align: middle;
+}
+.canvas-container {
+   position: relative;
+   margin: 0 auto;
+}
+#canvas {
+   width: 100%;
+   height: auto;
+   position: relative;
+   background-color: #9C9AFF;
+   tabindex: 1;
+   touch-action: none;
+   -ms-touch-action: none;
+   -webkit-tap-highlight-color: rgba(0,0,0,0);
+   -webkit-tap-highlight-color: transparent;
+}
+#userInfoText {
+   position: absolute;
+   z-index: 799999;
+   left: 0;
+   top: 0;
+   -webkit-tap-highlight-color: rgba(0,0,0,0);
+   -webkit-tap-highlight-color: transparent;
+}
+#inactiveBox {
+   position: absolute;
+   z-index: 900000;
+   left: 0;
+   top: 0;
+   -ms-touch-action: none;
+   -webkit-tap-highlight-color: rgba(0,0,0,0);
+   -webkit-tap-highlight-color: transparent;
+}
+#loginBox {
+   position: absolute;
+   z-index: 900000;
+   left: 0;
+   top: 0;
+   -ms-touch-action: none;
+   -webkit-tap-highlight-color: rgba(0,0,0,0);
+   -webkit-tap-highlight-color: transparent;
+}
+.loginButton {
+   position: absolute;
+   z-index: 900001;
+   left: 0;
+   top: 0;
+   touch-action: none;
+   -ms-touch-action: none;
+   cursor: pointer;
+   -webkit-tap-highlight-color: rgba(0,0,0,0);
+   -webkit-tap-highlight-color: transparent;
+}
+.holderButton {
+   position: absolute;
+   z-index: 800000;
+   left: 0;
+   top: 0;
+   touch-action: none;
+   -ms-touch-action: none;
+   cursor: pointer;
+   -webkit-tap-highlight-color: rgba(0,0,0,0);
+   -webkit-tap-highlight-color: transparent;
+}
+#hideMe {        /* this will hide div with id div_id_name */
+   overflow: hidden;
+   visibility: hidden;
+   height: 0;
+   width: 0;
+}
+#videoMask {
+   position: absolute;
+   z-index: 510;
+   cursor: auto;
+   tabindex: 2;
+   touch-action: none;
+   -ms-touch-action: none;
+   -webkit-tap-highlight-color: rgba(0,0,0,0);
+   -webkit-tap-highlight-color: transparent;
+}
+.buttonClass {
+   position: absolute;
+   z-index: 2;
+   cursor: pointer;
+   tabindex: 2;
+   touch-action: none;
+   -ms-touch-action: none;
+   -webkit-tap-highlight-color: rgba(0,0,0,0);
+   -webkit-tap-highlight-color: transparent;
+}
+.keyClass {
+   position: absolute;
+   z-index: 800000;
+   cursor: auto;
+   border-radius: 5px;
+   tabindex: 2;
+   touch-action: none;
+   -ms-touch-action: none;
+   -webkit-tap-highlight-color: rgba(0,0,0,0);
+   -webkit-tap-highlight-color: transparent;
+}
+.inputClass {
+  position: absolute;
+  z-index: 2;
+  font-size: 42px;
+  text-align: center;
+  margin: 0;
+  width: 50px;
+  height: 50px;
+  cursor: text;
+  touch-action: none;
+  -ms-touch-action: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
+}
+.gridCanvasClass {
+   position: absolute;
+   z-index: 2;
+   tabindex: 2;
+   -ms-touch-action: none;
+   -webkit-tap-highlight-color: rgba(0,0,0,0);
+   -webkit-tap-highlight-color: transparent;
+}
+.videoClass {
+   position: absolute;
+   z-index: 500;
+   cursor: auto;
+   tabindex: 2;
+   touch-action: none;
+   -ms-touch-action: none;
+   -webkit-tap-highlight-color: rgba(0,0,0,0);
+   -webkit-tap-highlight-color: transparent;
+}

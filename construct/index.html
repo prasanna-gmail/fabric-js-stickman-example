@@ -1,0 +1,53 @@
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Constructions Tool</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+
+		<script>
+			/*if (window.top != window.self) {
+				top.location.href = document.location.href;
+			}*/
+			var user = "guest";
+			var personal = -1;
+		
+			var isTask = false;
+			var hasCanvas = true;	
+			var mainCanvasFillStyle = '#FFC';
+			var mainCanvasBorderWidth = 10;
+			var cacheVersion = '200504';
+			
+			var scriptsToLoad = [
+				'./js/_drawMathsText.js',
+				'./js/_mathsInput.js',
+				'./js/_grid2.js',	
+				'./js/_keyboard.js',
+				'./js/_text2.js',
+				'./js/_draw.js',
+				'./js/_draw2.js',
+				'./js/_draw3.js',
+				'./js/_miscFuncs.js',
+				'./js/Notifier.js'
+			];
+			var scriptsToLoad2 = [
+				'./js/construct.js?20210926'
+			];	
+		</script>
+	</head>
+	 
+	<body>
+		<div class="hideMe" style="font-family:'Hobo'">.</div>
+		<div class="hideMe" style="font-family:'segoePrint'">.</div>
+		<div class="hideMe" style="font-family:'smileyMonster'">.</div>		
+		<div class="wrapper">
+		  <div class="container">
+			<div class="canvas-container" id="canvascontainer">
+			  <canvas id="canvas" width="1200" height="700" left="0" top="0" style="z-index:1"></canvas>
+			</div>
+		  </div>
+		</div>
+		<script src="holder2.js"></script>
+
+	</body>
+</html>
